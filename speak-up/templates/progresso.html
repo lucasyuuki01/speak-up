@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% from "_macros.html" import barra %}
+{% block titulo %}Meu progresso | Speak Up{% endblock %}
+{% block pagina %}progresso{% endblock %}
+{% block conteudo %}
+<section class="secao container">
+  <h1>Meu progresso</h1>
+  <p class="lead">Veja o quanto você já evoluiu. Cada palavra que você acerta entra na sua lista de palavras sabidas.</p>
+
+  <ul class="estatisticas" id="estatisticas">
+    <li><strong id="e-pontos">{{ resumo.pontos }}</strong><span>pontos</span></li>
+    <li><strong id="e-sabidas">{{ resumo.palavras_sabidas }}/{{ resumo.total_palavras }}</strong><span>palavras sabidas</span></li>
+    <li><strong id="e-modulos">{{ resumo.modulos_concluidos }}/{{ resumo.total_modulos }}</strong><span>módulos concluídos</span></li>
+    <li><strong id="e-resp">{{ resumo.respondidas }}</strong><span>respostas dadas</span></li>
+    <li><strong id="e-prec">{{ resumo.precisao }}%</strong><span>de acertos</span></li>
+    <li><strong id="e-rev">{{ resumo.para_revisar }}</strong><span>para revisar</span></li>
+  </ul>
+
+  {% if resumo.respondidas == 0 and resumo.palavras_sabidas == 0 %}
+  <p class="caixa-aula" id="caixa-vazio">Você ainda não praticou. Que tal começar pelo <a href="{{ url_for('modulo', slug=modulos[0].slug) }}">módulo 1</a>?</p>
+  {% endif %}
+
+  <h2 class="titulo-secao">Seus módulos</h2>
+  <ul class="lista-progresso">
+    {% for m in modulos %}{% set prog = resumo.modulos[m.slug] %}
+    <li data-modulo="{{ m.slug }}">
+      <a href="{{ url_for('modulo', slug=m.slug) }}"><span aria-hidden="true">{{ m.icone }}</span> {{ m.numero }}. {{ m.titulo }}</a>
+      {{ barra(prog.pct, 'Progresso em ' ~ m.titulo) }}
+      <small>{% if prog.concluido %}✓ Concluído{% else %}{{ prog.sabidas }} de {{ prog.total }} palavras sabidas{% endif %}</small>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="caixa-aula">
+    <h2>Onde meu progresso fica salvo?</h2>
+    <p>{% if estatico %}Neste navegador, no armazenamento local do site (localStorage). Nada é enviado a nenhum servidor. Se você limpar os dados do site ou usar outro aparelho, o progresso não aparece.{% else %}Neste navegador, em um cookie do site (válido por até 1 ano). Não guardamos nome, e-mail nem outros dados pessoais. Se você limpar os cookies ou usar outro aparelho, o progresso não aparece.{% endif %}</p>
+    <button type="button" class="btn btn-claro" id="btn-reiniciar">Apagar meu progresso e recomeçar</button>
+  </div>
+</section>
+{% endblock %}

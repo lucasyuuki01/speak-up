@@ -1,0 +1,27 @@
+{# Mostra a "imagem" de uma palavra: foto (se existir em static/images/vocab), emoji, cor ou texto. #}
+{% macro visual(p, classe='') %}
+  {% set img = imagem_da_palavra(p.id) %}
+  {% if img %}
+    <img class="visual visual-img {{ classe }}" src="{{ img }}" alt="{{ p.alt }}" loading="lazy">
+  {% elif p.visual.tipo == 'cor' %}
+    <span class="visual visual-cor {{ classe }}" role="img" aria-label="Cor {{ p.pt }}" style="background: {{ p.visual.valor }}"></span>
+  {% elif p.visual.tipo == 'texto' %}
+    <span class="visual visual-texto {{ classe }}" role="img" aria-label="{{ p.en }}">{{ p.visual.valor }}</span>
+  {% else %}
+    <span class="visual visual-emoji {{ classe }}" role="img" aria-label="{{ p.alt }}">{{ p.visual.valor }}</span>
+  {% endif %}
+{% endmacro %}
+
+{% macro botoes_audio(texto, frase=None) %}
+  <span class="audio-botoes">
+    <button type="button" class="btn btn-pequeno btn-claro" data-falar="{{ texto }}" aria-label="Ouvir {{ texto }}">🔊 Ouvir</button>
+    <button type="button" class="btn btn-pequeno btn-claro" data-falar="{{ texto }}" data-velocidade="0.6" aria-label="Ouvir {{ texto }} devagar">🐢 Devagar</button>
+    {% if frase %}<button type="button" class="btn btn-pequeno btn-claro" data-falar="{{ frase }}" aria-label="Ouvir a frase de exemplo">🔊 Frase</button>{% endif %}
+  </span>
+{% endmacro %}
+
+{% macro barra(pct, rotulo) %}
+  <div class="barra" role="progressbar" aria-valuenow="{{ pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ rotulo }}">
+    <span style="width: {{ pct }}%"></span>
+  </div>
+{% endmacro %}

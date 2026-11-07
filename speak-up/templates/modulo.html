@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% from "_macros.html" import visual, botoes_audio, barra with context %}
+{% block titulo %}{{ m.titulo }} | Speak Up{% endblock %}
+{% block descricao %}{{ m.objetivo }}{% endblock %}
+{% block pagina %}modulo{% endblock %}
+{% block conteudo %}
+{% set prog = resumo.modulos[m.slug] %}
+<section class="secao container">
+  <p class="migalha"><a href="{{ url_for('aulas') }}">← Todas as aulas</a></p>
+  <header class="cabecalho-modulo">
+    <span class="icone-grande" aria-hidden="true">{{ m.icone }}</span>
+    <div>
+      <p class="selo">Módulo {{ m.numero }} · {{ m.nivel }}</p>
+      <h1>{{ m.titulo }}</h1>
+    </div>
+  </header>
+
+  <div class="caixa-aula">
+    <h2>Objetivo da aula</h2>
+    <p>{{ m.objetivo }}</p>
+    <h2>Antes de começar</h2>
+    <p>{{ m.explicacao }}</p>
+    <p class="dica"><strong>💡 Dica:</strong> {{ m.dica }}</p>
+  </div>
+
+  <div class="progresso-mini largo" data-modulo="{{ m.slug }}">
+    {{ barra(prog.pct, 'Seu progresso neste módulo') }}
+    <small>{% if prog.concluido %}✓ Módulo concluído{% else %}{{ prog.sabidas }} de {{ prog.total }} palavras sabidas{% endif %}</small>
+  </div>
+
+  <h2 class="titulo-secao">Vocabulário</h2>
+  <ul class="grade-palavras">
+    {% for p in m.palavras %}
+    <li class="palavra {{ 'palavra-frase' if m.frente == 'ingles' }}">
+      {% if m.frente != 'ingles' %}{{ visual(p) }}{% else %}<span class="visual visual-emoji pequeno" role="img" aria-label="{{ p.alt }}">{{ p.visual.valor }}</span>{% endif %}
+      <p class="en">{{ p.en.upper() if m.frente != 'ingles' and m.slug != 'alfabeto' else p.en }}</p>
+      <p class="pt">{{ p.pt }}</p>
+      <p class="pron">Pronúncia: <em>{{ p.pron }}</em></p>
+      <p class="exemplo"><span lang="en">{{ p.ex_en }}</span><br><small>{{ p.ex_pt }}</small></p>
+      {{ botoes_audio(p.en if m.slug != 'alfabeto' else p.en ~ '.', p.ex_en if m.frente != 'ingles' else None) }}
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h2 class="titulo-secao">Hora de praticar</h2>
+  <p>Treinar logo depois de aprender ajuda a memorizar. Escolha uma atividade:</p>
+  <ul class="atalhos">
+    {% for t in m.exercicios %}{% if t != 'revisao' %}
+    <li><a class="btn btn-primario" href="{{ url_for('exercicios', modulo=m.slug, tipo=t) }}">{{ NOMES_EXERCICIOS[t] }}</a></li>
+    {% endif %}{% endfor %}
+    <li><a class="btn btn-claro" href="{{ url_for('exercicios', modulo=m.slug, tipo='revisao') }}">Revisão</a></li>
+  </ul>
+
+  <nav class="navegacao-modulos" aria-label="Outros módulos">
+    {% if anterior %}<a class="btn btn-claro" href="{{ url_for('modulo', slug=anterior.slug) }}">← {{ anterior.titulo }}</a>{% else %}<span></span>{% endif %}
+    {% if proximo %}<a class="btn btn-secundario" href="{{ url_for('modulo', slug=proximo.slug) }}">{{ proximo.titulo }} →</a>{% endif %}
+  </nav>
+</section>
+{% endblock %}

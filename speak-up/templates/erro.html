@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block titulo %}Algo deu errado | Speak Up{% endblock %}
+{% block conteudo %}
+<section class="secao container centro">
+  <p class="emoji-grande" aria-hidden="true">🛠️</p>
+  <h1>Algo deu errado por aqui.</h1>
+  <p>Não foi culpa sua. Tente de novo ou volte para a página inicial.</p>
+  <p><a class="btn btn-primario" href="{{ url_for('index') }}">Página inicial</a></p>
+</section>
+{% endblock %}

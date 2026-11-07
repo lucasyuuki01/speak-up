@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block pagina %}inicio{% endblock %}
+{% block conteudo %}
+<section class="heroi">
+  <div class="container heroi-grade">
+    <div>
+      <p class="selo">Inglês para iniciantes</p>
+      <h1>Aprenda inglês. <span class="destaque">Ganhe confiança.</span> Fale sem medo!</h1>
+      <p class="lead">Comece do zero, no seu ritmo. Você aprende cada palavra com imagem, tradução, pronúncia e uma frase de exemplo. Depois pratica com flashcards e quizzes, sem pressão: errar faz parte.</p>
+      <p class="acoes">
+        <a class="btn btn-primario btn-grande" href="{{ url_for('modulo', slug=modulos[0].slug) }}">Começar agora</a>
+        <a class="btn btn-secundario btn-grande" href="{{ url_for('aulas') }}">Ver todas as aulas</a>
+      </p>
+    </div>
+    <div class="heroi-cartao" aria-hidden="true">
+      <div class="mini-carta">
+        <span class="visual visual-emoji">🍎</span>
+        <strong>APPLE</strong>
+        <span>maçã · <em>épol</em></span>
+        <small>I like the apple.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="secao container" aria-labelledby="como">
+  <h2 id="como" class="titulo-secao">Como funciona</h2>
+  <ol class="passos">
+    <li><span class="num">1</span><h3>Escolha uma aula</h3><p>Os módulos começam no básico e aumentam a dificuldade aos poucos.</p></li>
+    <li><span class="num">2</span><h3>Veja, leia e ouça</h3><p>Imagem, palavra, tradução, pronúncia simplificada e uma frase curta.</p></li>
+    <li><span class="num">3</span><h3>Pratique</h3><p>Flashcards, quiz de imagens, associação e tradução, com retorno na hora.</p></li>
+    <li><span class="num">4</span><h3>Acompanhe</h3><p>Veja seus pontos, as palavras que já sabe e o que precisa revisar.</p></li>
+  </ol>
+</section>
+
+<section class="secao secao-clara" aria-labelledby="modulos">
+  <div class="container">
+    <h2 id="modulos" class="titulo-secao">10 módulos para começar</h2>
+    <ul class="grade-modulos compacta">
+      {% for m in modulos %}
+      <li><a class="cartao-modulo" href="{{ url_for('modulo', slug=m.slug) }}">
+        <span class="icone" aria-hidden="true">{{ m.icone }}</span>
+        <span><small>Módulo {{ m.numero }}</small><strong>{{ m.titulo }}</strong></span>
+      </a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="secao container" aria-labelledby="transparencia">
+  <h2 id="transparencia" class="titulo-secao">Bom saber</h2>
+  <div class="grade-info">
+    <div class="info"><h3>🔊 Áudio</h3><p>A pronúncia usa a voz do seu navegador, em inglês dos EUA. Funciona em navegadores atuais, mas a qualidade depende da voz instalada no seu aparelho. Se não houver voz, avisamos você na tela.</p></div>
+    <div class="info"><h3>💾 Seu progresso</h3><p>{% if estatico %}Pontos e palavras aprendidas ficam salvos neste navegador, no armazenamento local do site (localStorage). Se você limpar os dados do site ou trocar de aparelho, o progresso começa de novo.{% else %}Pontos e palavras aprendidas ficam salvos neste navegador, em um cookie do site. Se você limpar os cookies ou trocar de aparelho, o progresso começa de novo.{% endif %}</p></div>
+    {% if estatico %}<div class="info"><h3>🐍 Python no navegador</h3><p>Os exercícios são corrigidos por um programa em Python que roda dentro do seu navegador (Pyodide). Na primeira vez, o download leva alguns segundos e precisa de internet.</p></div>{% endif %}
+    <div class="info"><h3>🔒 Privacidade</h3><p>Não pedimos cadastro, nome nem e-mail. Você não precisa criar conta.</p></div>
+  </div>
+</section>
+{% endblock %}

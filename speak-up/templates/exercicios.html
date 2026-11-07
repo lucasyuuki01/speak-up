@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block titulo %}Exercícios | Speak Up{% endblock %}
+{% block pagina %}exercicios{% endblock %}
+{% block conteudo %}
+<section class="secao container" id="area-exercicios">
+  <h1>Exercícios</h1>
+  <p class="lead">Escolha um módulo e uma atividade. Você ganha 10 pontos por resposta certa na primeira tentativa. Errar não tira pontos.</p>
+
+  <div class="seletor" id="seletor">
+    <div class="campo">
+      <label for="sel-modulo">1. Módulo</label>
+      <select id="sel-modulo">
+        {% for m in modulos %}<option value="{{ m.slug }}">{{ m.numero }}. {{ m.titulo }}</option>{% endfor %}
+        <option value="todos">Todos os módulos (só Revisão)</option>
+      </select>
+    </div>
+    <div class="campo">
+      <span class="rotulo" id="rot-tipo">2. Atividade</span>
+      <div class="tipos" role="group" aria-labelledby="rot-tipo">
+        {% for t, nome in NOMES_EXERCICIOS.items() %}
+        <button type="button" class="btn btn-claro tipo" data-tipo="{{ t }}">{{ nome }}</button>
+        {% endfor %}
+      </div>
+      <p class="ajuda" id="ajuda-tipo"></p>
+    </div>
+  </div>
+
+  <div id="palco" class="palco" aria-live="polite" tabindex="-1">
+    <noscript>Este site usa JavaScript nos exercícios. Ative-o no navegador para praticar.</noscript>
+    <p class="vazio">Escolha uma atividade acima para começar. 🚀</p>
+  </div>
+</section>
+<script>window.SPEAKUP_MODULOS = {{ meta | tojson }};</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% from "_macros.html" import barra %}
+{% block titulo %}Aulas | Speak Up{% endblock %}
+{% block pagina %}aulas{% endblock %}
+{% block conteudo %}
+<section class="secao container">
+  <h1>Aulas</h1>
+  <p class="lead">Siga a ordem dos módulos ou escolha o assunto que mais combina com você. Cada módulo tem vocabulário com imagens, pronúncia e exercícios.</p>
+
+  <details class="legenda">
+    <summary>Como ler a pronúncia simplificada</summary>
+    <ul>
+      <li>É uma aproximação feita com letras do português. O som do inglês não é exatamente igual.</li>
+      <li><strong>rr</strong> é um "h" soprado, bem leve: <em>hello → rrelôu</em>.</li>
+      <li><strong>th</strong> é feito com a ponta da língua entre os dentes: <em>three → thrí</em>.</li>
+      <li><strong>â</strong> é um som neutro e curtinho: <em>bus → bâs</em>.</li>
+      <li>Use os botões 🔊 para ouvir e 🐢 para ouvir mais devagar.</li>
+    </ul>
+  </details>
+
+  <ul class="grade-modulos">
+    {% for m in modulos %}
+    {% set prog = resumo.modulos[m.slug] %}
+    <li class="cartao-modulo grande">
+      <a href="{{ url_for('modulo', slug=m.slug) }}" class="cartao-link">
+        <span class="icone" aria-hidden="true">{{ m.icone }}</span>
+        <span class="texto">
+          <small>Módulo {{ m.numero }} · {{ m.nivel }}</small>
+          <strong>{{ m.titulo }}</strong>
+          <span>{{ m.objetivo }}</span>
+        </span>
+      </a>
+      <div class="progresso-mini" data-modulo="{{ m.slug }}">
+        {{ barra(prog.pct, 'Progresso no módulo ' ~ m.titulo) }}
+        <small>{% if prog.concluido %}✓ Concluído{% else %}{{ prog.sabidas }} de {{ prog.total }} palavras sabidas{% endif %}</small>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

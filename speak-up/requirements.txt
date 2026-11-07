@@ -1,0 +1,3 @@
+Flask>=3.0,<4.0
+# gunicorn só é usado na hospedagem (Linux); não é necessário no Windows
+gunicorn>=22.0; sys_platform != "win32"

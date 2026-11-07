@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block titulo %}Página não encontrada | Speak Up{% endblock %}
+{% block conteudo %}
+<section class="secao container centro">
+  <p class="emoji-grande" aria-hidden="true">🧭</p>
+  <h1>Ops! Não encontramos esta página.</h1>
+  <p>Sem problemas. Vamos voltar para um lugar conhecido.</p>
+  <p><a class="btn btn-primario" href="{{ url_for('aulas') }}">Ver as aulas</a> <a class="btn btn-claro" href="{{ url_for('index') }}">Página inicial</a></p>
+</section>
+{% endblock %}

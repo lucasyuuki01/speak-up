@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercícios | Speak Up</title>
+  <meta name="description" content="Speak Up: aprenda inglês para iniciantes com imagens, pronúncia, flashcards e quizzes. Aprenda inglês. Ganhe confiança. Fale sem medo!">
+  <meta name="theme-color" content="#0F57E8">
+  <meta property="og:title" content="Speak Up: aprenda inglês do zero">
+  <meta property="og:description" content="Aprenda inglês. Ganhe confiança. Fale sem medo!">
+  <meta property="og:image" content="static/images/logo.png">
+  <link rel="icon" type="image/png" href="static/images/favicon.png">
+  <script>window.SPEAKUP_ESTATICO = true;</script>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body data-pagina="exercicios">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container topo-linha">
+      <a class="marca" href="index.html" aria-label="Speak Up, página inicial">
+        <img src="static/images/logo.png" alt="Speak Up" width="1262" height="392">
+      </a>
+      <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
+      <nav id="menu-principal" class="menu" aria-label="Navegação principal">
+        <a href="index.html" >Início</a>
+        <a href="aulas.html" >Aulas</a>
+        <a href="exercicios.html" aria-current="page">Exercícios</a>
+        <a href="progresso.html" >Meu progresso</a>
+        <a class="pontos" href="progresso.html" title="Seus pontos">⭐ <span id="pontos">0</span> pontos</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="aviso-voz" class="aviso-voz" role="status" hidden></div>
+
+  <main id="conteudo" tabindex="-1">
+    
+<section class="secao container" id="area-exercicios">
+  <h1>Exercícios</h1>
+  <p class="lead">Escolha um módulo e uma atividade. Você ganha 10 pontos por resposta certa na primeira tentativa. Errar não tira pontos.</p>
+
+  <div class="seletor" id="seletor">
+    <div class="campo">
+      <label for="sel-modulo">1. Módulo</label>
+      <select id="sel-modulo">
+        <option value="alfabeto">1. Alfabeto e pronúncia</option><option value="numeros-cores">2. Números e cores</option><option value="animais">3. Animais</option><option value="frutas-alimentos">4. Frutas e alimentos</option><option value="objetos">5. Objetos do cotidiano</option><option value="familia-pessoas">6. Família e pessoas</option><option value="corpo">7. Partes do corpo</option><option value="lugares-transportes">8. Lugares e transportes</option><option value="saudacoes">9. Saudações e apresentações</option><option value="frases-basicas">10. Frases básicas do cotidiano</option>
+        <option value="todos">Todos os módulos (só Revisão)</option>
+      </select>
+    </div>
+    <div class="campo">
+      <span class="rotulo" id="rot-tipo">2. Atividade</span>
+      <div class="tipos" role="group" aria-labelledby="rot-tipo">
+        
+        <button type="button" class="btn btn-claro tipo" data-tipo="flashcards">Flashcards</button>
+        
+        <button type="button" class="btn btn-claro tipo" data-tipo="quiz">Quiz de imagens</button>
+        
+        <button type="button" class="btn btn-claro tipo" data-tipo="associacao">Associação de palavras</button>
+        
+        <button type="button" class="btn btn-claro tipo" data-tipo="traducao">Tradução: inglês → português</button>
+        
+        <button type="button" class="btn btn-claro tipo" data-tipo="traducao_inversa">Tradução: português → inglês</button>
+        
+        <button type="button" class="btn btn-claro tipo" data-tipo="revisao">Revisão</button>
+        
+      </div>
+      <p class="ajuda" id="ajuda-tipo"></p>
+    </div>
+  </div>
+
+  <div id="palco" class="palco" aria-live="polite" tabindex="-1">
+    <noscript>Este site usa JavaScript nos exercícios. Ative-o no navegador para praticar.</noscript>
+    <p class="vazio">Escolha uma atividade acima para começar. 🚀</p>
+  </div>
+</section>
+<script>window.SPEAKUP_MODULOS = {"alfabeto": {"exercicios": ["flashcards", "quiz", "revisao"], "titulo": "Alfabeto e pron\u00fancia"}, "animais": {"exercicios": ["flashcards", "quiz", "associacao", "traducao", "traducao_inversa", "revisao"], "titulo": "Animais"}, "corpo": {"exercicios": ["flashcards", "quiz", "associacao", "traducao", "traducao_inversa", "revisao"], "titulo": "Partes do corpo"}, "familia-pessoas": {"exercicios": ["flashcards", "quiz", "associacao", "traducao", "traducao_inversa", "revisao"], "titulo": "Fam\u00edlia e pessoas"}, "frases-basicas": {"exercicios": ["flashcards", "traducao", "traducao_inversa", "revisao"], "titulo": "Frases b\u00e1sicas do cotidiano"}, "frutas-alimentos": {"exercicios": ["flashcards", "quiz", "associacao", "traducao", "traducao_inversa", "revisao"], "titulo": "Frutas e alimentos"}, "lugares-transportes": {"exercicios": ["flashcards", "quiz", "associacao", "traducao", "traducao_inversa", "revisao"], "titulo": "Lugares e transportes"}, "numeros-cores": {"exercicios": ["flashcards", "quiz", "associacao", "traducao", "traducao_inversa", "revisao"], "titulo": "N\u00fameros e cores"}, "objetos": {"exercicios": ["flashcards", "quiz", "associacao", "traducao", "traducao_inversa", "revisao"], "titulo": "Objetos do cotidiano"}, "saudacoes": {"exercicios": ["flashcards", "traducao", "traducao_inversa", "revisao"], "titulo": "Sauda\u00e7\u00f5es e apresenta\u00e7\u00f5es"}};</script>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape-grade">
+      <div>
+        <img class="rodape-logo" src="static/images/logo.png" alt="Speak Up" width="1262" height="392">
+        <p class="slogan">Aprenda inglês. Ganhe confiança. Fale sem medo!</p>
+      </div>
+      <div>
+        <h2>Navegue</h2>
+        <ul>
+          <li><a href="aulas.html">Aulas</a></li>
+          <li><a href="exercicios.html">Exercícios</a></li>
+          <li><a href="progresso.html">Meu progresso</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Sobre</h2>
+        <p>Speak Up é uma startup fictícia de educação e tecnologia (EdTech), criada em um projeto acadêmico. Não coletamos nome, e-mail nem outros dados pessoais.</p>
+      </div>
+    </div>
+    <p class="rodape-fim">© 2026 Speak Up. Projeto educacional fictício.</p>
+  </footer>
+
+  <script src="static/js/script.js" defer></script>
+</body>
+</html>

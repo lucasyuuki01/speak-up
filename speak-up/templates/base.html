@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Speak Up: aprenda inglês do zero{% endblock %}</title>
+  <meta name="description" content="{% block descricao %}Speak Up: aprenda inglês para iniciantes com imagens, pronúncia, flashcards e quizzes. Aprenda inglês. Ganhe confiança. Fale sem medo!{% endblock %}">
+  <meta name="theme-color" content="#0F57E8">
+  <meta property="og:title" content="Speak Up: aprenda inglês do zero">
+  <meta property="og:description" content="Aprenda inglês. Ganhe confiança. Fale sem medo!">
+  <meta property="og:image" content="{{ url_for('static', filename='images/logo.png') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  {% if estatico %}<script>window.SPEAKUP_ESTATICO = true;</script>{% endif %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-pagina="{% block pagina %}{% endblock %}">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="container topo-linha">
+      <a class="marca" href="{{ url_for('index') }}" aria-label="Speak Up, página inicial">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Speak Up" width="1262" height="392">
+      </a>
+      <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
+      <nav id="menu-principal" class="menu" aria-label="Navegação principal">
+        <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}aria-current="page"{% endif %}>Início</a>
+        <a href="{{ url_for('aulas') }}" {% if request.endpoint in ('aulas','modulo') %}aria-current="page"{% endif %}>Aulas</a>
+        <a href="{{ url_for('exercicios') }}" {% if request.endpoint == 'exercicios' %}aria-current="page"{% endif %}>Exercícios</a>
+        <a href="{{ url_for('progresso') }}" {% if request.endpoint == 'progresso' %}aria-current="page"{% endif %}>Meu progresso</a>
+        <a class="pontos" href="{{ url_for('progresso') }}" title="Seus pontos">⭐ <span id="pontos">{{ resumo.pontos }}</span> pontos</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="aviso-voz" class="aviso-voz" role="status" hidden></div>
+
+  <main id="conteudo" tabindex="-1">
+    {% block conteudo %}{% endblock %}
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape-grade">
+      <div>
+        <img class="rodape-logo" src="{{ url_for('static', filename='images/logo.png') }}" alt="Speak Up" width="1262" height="392">
+        <p class="slogan">Aprenda inglês. Ganhe confiança. Fale sem medo!</p>
+      </div>
+      <div>
+        <h2>Navegue</h2>
+        <ul>
+          <li><a href="{{ url_for('aulas') }}">Aulas</a></li>
+          <li><a href="{{ url_for('exercicios') }}">Exercícios</a></li>
+          <li><a href="{{ url_for('progresso') }}">Meu progresso</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Sobre</h2>
+        <p>Speak Up é uma startup fictícia de educação e tecnologia (EdTech), criada em um projeto acadêmico. Não coletamos nome, e-mail nem outros dados pessoais.</p>
+      </div>
+    </div>
+    <p class="rodape-fim">© 2026 Speak Up. Projeto educacional fictício.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Variáveis de ambiente e segredos (nunca envie chaves ao GitHub)
+.env
+.env.*
+secrets.toml
+.streamlit/secrets.toml
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
